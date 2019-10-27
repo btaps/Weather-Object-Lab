@@ -1293,7 +1293,7 @@ let tempsArr = []
 let weatherArr = []
 
 const createDays = (n)=>{
-  for(let i=0; i<=n; i++){
+  for(let i=1; i<=n; i++){
     class DayStats {
         constructor(){
             this.todaysDate= ""
@@ -1406,8 +1406,9 @@ const getWeatherArray = (Array)=> {
         }
     }    
 }
-createDays(5);
+createDays(6);
 getWeatherArray(evanstonWeather);
+
 
 
 //---------------------------- #8 --------------------------------
