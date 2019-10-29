@@ -1276,15 +1276,15 @@ console.log("The wind speed is " + windSpeed + " with winds blowing " + degrees 
 
 //---------------------------- #5 --------------------------------
 
-for(let i = 0; i<= evanstonWeather.list.length - 1; i = i +1){
-        if(evanstonWeather.list[i].dt_txt.slice(11,19) == "12:00:00" ){
-            if (evanstonWeather.list[i].main.humidity > 75){
-                console.log(evanstonWeather.list[i].dt_txt + " " + evanstonWeather.list[i].main.humidity + "% gross")
-            } else if (evanstonWeather.list[i].main.humidity <= 75){
-                console.log(evanstonWeather.list[i].dt_txt + " " + evanstonWeather.list[i].main.humidity + "%")
-            }  
-        }
-    }
+// for(let i = 0; i<= evanstonWeather.list.length - 1; i = i +1){
+//         if(evanstonWeather.list[i].dt_txt.slice(11,19) == "12:00:00" ){
+//             if (evanstonWeather.list[i].main.humidity > 75){
+//                 console.log(evanstonWeather.list[i].dt_txt + " " + evanstonWeather.list[i].main.humidity + "% gross")
+//             } else if (evanstonWeather.list[i].main.humidity <= 75){
+//                 console.log(evanstonWeather.list[i].dt_txt + " " + evanstonWeather.list[i].main.humidity + "%")
+//             }  
+//         }
+//     }
 
 
 //---------------------------- #6 and #7 --------------------------------
@@ -1299,7 +1299,7 @@ const createDays = (n)=>{
             this.todaysDate= ""
             this.highTemp = 0
             this.lowTemp = 0
-            this.weatherForDay = []
+            this.weatherForDay = ""
         }
 
     }
@@ -1330,15 +1330,14 @@ const pushTempsIntoArray = (num1)=>{
 
 const getMostFrequentWeather = (num1, num2, num3)=>{
     weatherArr.push(evanstonWeather.list[num1].weather[0].description)
-
     if(weatherArr.length !== num3){return}
+
     let numberAppeared = 0
     let numberToCompare = 1
-    let equalNumberToCompare = 0
     let mostAppearedItem = ""
 
     for(let j = 0; j < weatherArr.length; j++){
-        for(let h = 0; h < weatherArr.length; h++){
+        for(let h = j; h < weatherArr.length; h++){
             if(weatherArr[j] == weatherArr[h]){
                 numberAppeared++;
             }else if(numberToCompare < numberAppeared){
@@ -1354,7 +1353,10 @@ const getMostFrequentWeather = (num1, num2, num3)=>{
         }
         numberAppeared = 0;
     }
+    
     weatherArr = []
+
+    myWeather[num2].weatherForDay = mostAppearedItem
 }
 
 const getWeatherArray = (Array)=> {
@@ -1367,6 +1369,7 @@ const getWeatherArray = (Array)=> {
             pushTempsIntoArray(i);
             findHighLowTemps(2, index);
             getMostFrequentWeather(i, index, 2);
+
 
         }else if (Array.list[i].dt_txt.slice(0,10) == "2018-03-17" ){
             
